@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
 
 import { Calendar } from 'react-native-calendars'
 import { getFormattedDate } from './../../helpers/date'

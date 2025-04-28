@@ -4,10 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MaterialIcons } from '@expo/vector-icons'; 
 
-import { RootStackParamList } from "../App";
+import { RootStackParamList } from "../types/RootStackParamList";
 
 import { useCalendarStore } from '../store/calendarStore';
-import CustomCalendar from './CustomCalendar';
 import PrimaryButton from '@/components/ui/PrimaryButton';
 
 interface Props {

@@ -1,18 +1,23 @@
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native'
 
-const TextInputField = ({ label, value, onChangeText, type = 'text', placeholder, styles }) => {
+const TextInputField = ({
+  label,
+  value,
+  onChangeText,
+  type = 'text',
+  placeholder,
+  styles
+}) => {
   return (
-    // <View style={styles.inputContainer}>
-    //   <Text style={styles.label}>{label}</Text>
-      <TextInput
-        style={styles}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        // secureTextEntry={type === 'password'}
-      />
-    // </View>
-  );
+    <TextInput
+      style={styles}
+      value={value}
+      onChangeText={onChangeText}
+      placeholder={placeholder}
+      type={type}
+      label={label}
+    />
+  )
 }
 
-export default TextInputField;
+export default TextInputField

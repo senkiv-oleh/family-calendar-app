@@ -4,10 +4,8 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  FlatList,
-  Pressable
+  FlatList
 } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'
 import Icon from './Icon'
 
 const SimpleDropdown = ({ data, selectedValue, label, onSelect }) => {
@@ -31,12 +29,6 @@ const SimpleDropdown = ({ data, selectedValue, label, onSelect }) => {
           icon='arrow-drop-down'
           style={[styles.arrowIcon, { color: '#A28DD0' }]}
         />
-        {/* <MaterialIcons
-          style={styles.arrowIcon}
-          name='arrow-drop-down'
-          size={24}
-          color='#A28DD0'
-        /> */}
       </TouchableOpacity>
 
       {isOpen &&
@@ -65,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   input: {
     display: 'flex',

@@ -34,12 +34,10 @@ const CalendarList: React.FC<Props> = ({ onSelectCalendar, onPressed }) => {
         renderItem={({ item }) =>
           <TouchableOpacity
             style={styles.item}
-            onPress={value => {
+            onPress={() => {
               onSelectCalendar(item.id);
               onPressed(item.id);
-              // navigation.navigate("EventForm", {
-              //   calendarId: item.id
-              // });
+
               navigation.navigate("CalendarDetailsScreen", {
                 calendarId: item.id
               });
