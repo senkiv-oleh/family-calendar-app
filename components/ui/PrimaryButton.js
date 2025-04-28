@@ -2,7 +2,7 @@ import { View, Text, Pressable, StyleSheet } from 'react-native'
 import Colors from '@/constants/colors'
 import Icon from './Icon'
 
-const TransparentButton = ({ children, onPress, icon = '', style = {} }) => {
+const PrimaryButton = ({ children, onPress, icon = '', style = {} }) => {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -19,25 +19,28 @@ const TransparentButton = ({ children, onPress, icon = '', style = {} }) => {
   )
 }
 
-export default TransparentButton
+export default PrimaryButton
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {
-    backgroundColor: 'transparent',
     margin: 4
   },
   buttonInnerContainer: {
-    backgroundColor: 'transparent',
-    padding: 15
+    backgroundColor: Colors.primary300,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center', 
+    
   },
   buttonText: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: Colors.primary500,
+      color: "#fff",
     textAlign: 'center',
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: "bold",
   },
   pressed: {
     opacity: 0.75

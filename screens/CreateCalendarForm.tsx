@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet,TouchableOpacity, FlatList, Text } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { RootStackParamList } from "../types/RootStackParamList";
 
