@@ -100,11 +100,9 @@ const CalendarDetailsScreen = ({ route }: { route: RouteParams }) => {
         <CalendarView
           markedDates={markedDates}
           onPressDay={handleDayPress}
-          viewMode={viewMode}
           events={calendar.events}
         />
       </View>
-
       <NearestEventsList events={calendar.events} />
 
       {selectedDate &&

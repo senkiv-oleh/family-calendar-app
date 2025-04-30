@@ -1,7 +1,6 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import { View, Pressable, StyleSheet, Text } from "react-native";
-import Calendar from "./ui/Calendar";
-import { Agenda } from "react-native-calendars";
+import CalendarComponent from "./ui/CalendarComponent";
 
 import Icon from "./ui/Icon";
 import { getFormattedDate } from "../helpers/date";
@@ -15,7 +14,6 @@ const years = Array.from({ length: 126 }, (_, i) => today.getFullYear() - i);
 type CalendarViewProps = {
   onPressDay: (day: { dateString: string }) => void;
   markedDates: any;
-  viewMode: string;
   events: any[];
 };
 
@@ -33,14 +31,14 @@ interface Event {
 const CalendarView = ({
   onPressDay,
   markedDates,
-  viewMode,
   events
 }: CalendarViewProps) => {
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth());
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
   const [items, setItems] = useState<{ [key: string]: Event[] }>({});
 
-  console.log("viewMode", events);
+  const selectedDate = getFormattedDate(today.getFullYear(), today.getMonth());
+  console.log(selectedDate);
 
   const handleMonthChange = (direction: "prev" | "next") => {
     setSelectedMonth(prev => {
@@ -60,38 +58,55 @@ const CalendarView = ({
     });
   };
 
-  const renderItem = (item: Event) => {
-    console.log("item2", item);
-    return (
-      <View style={[styles.item]}>
-        <Text style={styles.name}>
-          {item.title}
-        </Text>
-        <Text style={styles.time}>
-          {item.startTime} - {item.endTime}
-        </Text>
-        <Text style={styles.location}>
-          📍 {item.location}
-        </Text>
-        <Text style={styles.description}>
-          {item.type}
-        </Text>
-      </View>
-    );
-  };
+  const renderItem = (item: Event) =>
+    <View style={styles.item}>
+      <Text style={styles.name}>
+        {item.title}
+      </Text>
+      <Text style={styles.time}>
+        {item.startTime} - {item.endTime}
+      </Text>
+      <Text style={styles.location}>
+        📍 {item.location}
+      </Text>
+      <Text style={styles.description}>
+        {item.type}
+      </Text>
+    </View>;
 
   const loadItems = () => {
-    console.log("loadItems", events);
     const newItems: { [key: string]: Event[] } = {};
-
     events.forEach(event => {
       if (!newItems[event.date]) {
         newItems[event.date] = [];
       }
       newItems[event.date].push(event);
     });
-
     setItems(newItems);
+  };
+
+  const renderDayEvents = () => {
+    const todayEvents = events.filter(event => event.date === selectedDate);
+    return todayEvents.length > 0
+      ? todayEvents.map((event, index) =>
+          <View key={index} style={styles.item}>
+            <Text style={styles.name}>
+              {event.title}
+            </Text>
+            <Text style={styles.time}>
+              {event.startTime} - {event.endTime}
+            </Text>
+            <Text style={styles.location}>
+              📍 {event.location}
+            </Text>
+            <Text style={styles.description}>
+              {event.type}
+            </Text>
+          </View>
+        )
+      : <View style={styles.emptyDate}>
+          <Text>No events for today</Text>
+        </View>;
   };
 
   return (
@@ -128,25 +143,15 @@ const CalendarView = ({
           </Pressable>
         </View>
       </View>
-      {viewMode === "week"
-        ? <Agenda
-            items={items}
-            // Define a placeholder function for loadItems
-            loadItemsForMonth={loadItems}
-            renderItem={renderItem}
-            selected={"2025-04-29"}
-            renderEmptyDate={() =>
-              <View style={styles.emptyDate}>
-                <Text>No events for this day</Text>
-              </View>}
-          />
-        : <Calendar
-            selectedMonth={selectedMonth}
-            selectedYear={selectedYear}
-            onPressDay={onPressDay}
-            // markedDates={markedDates} // не забудь прокинути markedDates у календар
-            // viewMode={viewMode} // і режим перегляду
-          />}
+
+      <CalendarComponent
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
+        onPressDay={onPressDay}
+        markedDates={markedDates}
+        setSelectedMonth={setSelectedMonth}
+        setSelectedYear={setSelectedYear}
+      />
     </View>
   );
 };
