@@ -11,5 +11,5 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
-, "screens/DayViewScreen.js", "screens/CalendarScreen.tsx", "screens/CustomCalendar.tsx", "components/CalendarView.tsx", "components/ui/TransparentButton.js", "App.tsx"  ]
+, "screens/DayViewScreen.js", "screens/CalendarScreen.tsx", "screens/CustomCalendar.tsx", "components/CalendarView.tsx", "components/ui/TransparentButton.js", "App.tsx", "context/event-context.js", "components/EventForm/EventForm.tsx"  ]
 }

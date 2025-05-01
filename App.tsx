@@ -9,6 +9,7 @@ import CalendarDetailsScreen from "./screens/CalendarDetailsScreen";
 import CreateEventScreen from "./screens/CreateEventScreen";
 
 import { RootStackParamList } from "./types/RootStackParamList";
+import { EventProvider } from "./context/event-context";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,7 +23,7 @@ export default function App() {
           options={{ title: "Calendar" }}
         />
 
-          <Stack.Screen
+        <Stack.Screen
           name="CreateCalendarForm"
           component={CreateCalendarForm}
           options={{ title: "Create calendar" }}
@@ -34,15 +35,20 @@ export default function App() {
           options={{ title: "New event" }}
         />
 
-      
-
         <Stack.Screen
           name="CalendarDetailsScreen"
           component={CalendarDetailsScreen}
           options={{ title: "Create details" }}
         />
 
-        <Stack.Screen name="CreateEvent" component={CreateEventScreen} />
+        <Stack.Screen
+          name="CreateEvent"
+          component={() =>
+            <EventProvider>
+              <CreateEventScreen />
+            </EventProvider>
+          }
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
